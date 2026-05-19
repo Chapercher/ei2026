@@ -1,0 +1,191 @@
+---
+const achievements = [
+  {
+    icon: '🤖',
+    name: 'Early Adopter IA',
+    rarity: 'Légendaire',
+    desc: 'Première personne de l\'agence à avoir pris le pli de l\'IA. J\'utilise Claude depuis 2022, bien avant que ça devienne mainstream.',
+    unlocked: '2022',
+  },
+  {
+    icon: '🧠',
+    name: 'Membre du Pôle IA',
+    rarity: 'Épique',
+    desc: 'Rejoint officiellement le pôle IA en 2025. Heureux d\'avoir trouvé ma place là où je pouvais transformer ma curiosité en valeur pour l\'agence.',
+    unlocked: '2025',
+  },
+  {
+    icon: '🎯',
+    name: 'Autonomie totale',
+    rarity: 'Épique',
+    desc: 'Dès qu\'un besoin émerge — en interne ou côté client — je réagis en autonomie pour trouver la solution. Pas besoin d\'attendre.',
+    unlocked: 'Permanent',
+  },
+  {
+    icon: '🌐',
+    name: 'Hub multi-pôles',
+    rarity: 'Rare',
+    desc: 'Position centrale entre tous les pôles : webmarketing, graphiste, développeur, compta. Le pont qui fait circuler l\'info.',
+    unlocked: 'Permanent',
+  },
+  {
+    icon: '💼',
+    name: 'Apporteur d\'affaires',
+    rarity: 'Rare',
+    desc: 'Je ramène des clients à l\'agence. Le réseau et le bouche-à-oreille font partie du job.',
+    unlocked: '2026',
+  },
+  {
+    icon: '🤝',
+    name: 'Ambassadeur partenaires',
+    rarity: 'Épique',
+    desc: 'Je gère la relation commerciale avec MBE, PrestaShop, Probance et Payplug — alors que ça ne fait pas partie de mes missions officielles. Mais j\'adore garder ce lien commercial avec nos partenaires.',
+    unlocked: '2026',
+    partners: ['MBE', 'PrestaShop', 'Probance', 'Payplug'],
+  },
+];
+
+const rarityColors = {
+  'Légendaire': '#8a7220',
+  'Épique': '#6b48a8',
+  'Rare': '#3a7da8',
+};
+---
+<section id="achievements" class="achievements">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="tag tag-gold">★ Chapitre 3</span>
+      <h2>Achievements <span class="gradient-text">débloqués</span></h2>
+      <p>Les badges qui définissent ma contribution cette année — au-delà de la fiche de poste.</p>
+    </div>
+
+    <div class="ach-grid">
+      {achievements.map((a) => (
+        <article class="ach reveal">
+          <div class="ach-icon">{a.icon}</div>
+          <div class="ach-body">
+            <header>
+              <h3>{a.name}</h3>
+              <span class="rarity" style={`color: ${rarityColors[a.rarity]}; border-color: ${rarityColors[a.rarity]}40;`}>{a.rarity}</span>
+            </header>
+            <p>{a.desc}</p>
+            {a.partners && (
+              <div class="partners">
+                {a.partners.map((p) => <span class="partner-chip">{p}</span>)}
+              </div>
+            )}
+            <footer>
+              <span class="unlocked">Débloqué · {a.unlocked}</span>
+            </footer>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .ach-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+  }
+
+  .ach {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 20px;
+    padding: 24px;
+    background: var(--surface-strong);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    backdrop-filter: blur(20px);
+    transition: all 0.35s;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .ach::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(245, 230, 168, 0.18), transparent 50%);
+    opacity: 0;
+    transition: opacity 0.4s;
+    pointer-events: none;
+  }
+
+  .ach:hover {
+    transform: translateY(-4px);
+    border-color: rgba(212, 185, 78, 0.4);
+    box-shadow: 0 20px 50px -15px rgba(58, 70, 120, 0.18);
+  }
+
+  .ach:hover::after { opacity: 1; }
+
+  .ach-icon {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    background: linear-gradient(135deg, rgba(245, 230, 168, 0.5), rgba(201, 184, 232, 0.5));
+    border-radius: 16px;
+    border: 1px solid rgba(212, 185, 78, 0.3);
+  }
+
+  .ach-body header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
+
+  .rarity {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    padding: 3px 8px;
+    border-radius: 4px;
+    border: 1px solid;
+  }
+
+  .ach-body p {
+    color: var(--text-1);
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+  }
+
+  .partners {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+
+  .partner-chip {
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: rgba(201, 184, 232, 0.35);
+    border: 1px solid rgba(157, 127, 209, 0.4);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: #6b48a8;
+  }
+
+  .unlocked {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-3);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+</style>

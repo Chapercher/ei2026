@@ -1,0 +1,228 @@
+---
+---
+<section id="hero" class="hero">
+  <div class="container hero-inner">
+    <div class="hero-badge reveal">
+      <span class="dot"></span>
+      <span>Made with Claude IA · Entretien Individuel 2026</span>
+    </div>
+
+    <h1 class="reveal">
+      Quentin <span class="gradient-text">Charton</span>
+      <br/><span class="hero-subtitle">Rétrospective d'une année au cœur des pôles</span>
+    </h1>
+
+    <div class="stripes-deco reveal" aria-hidden="true"></div>
+
+    <p class="hero-lead reveal">
+      J'ai pris le pli de l'IA assez rapidement — je joue avec l'IA depuis 2022.
+      Heureux d'avoir rejoint le pôle IA l'année dernière, j'ai passé l'année à concevoir
+      des outils pour les différents pôles, à imaginer des solutions sur-mesure pour nos
+      clients, et à entretenir nos relations partenaires.
+    </p>
+
+    <div class="hero-stats reveal">
+      <div class="stat">
+        <div class="stat-value gradient-text">2022</div>
+        <div class="stat-label">Découverte de l'IA</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value gradient-text">5</div>
+        <div class="stat-label">Pôles servis</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value gradient-text">5</div>
+        <div class="stat-label">Partenaires</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value gradient-text">∞</div>
+        <div class="stat-label">Problèmes résolus</div>
+      </div>
+    </div>
+
+    <div class="hero-cta reveal">
+      <a href="#hub" class="btn-primary">Voir mes projets par pôle</a>
+      <a href="#bilan" class="btn-secondary">Aller au bilan</a>
+    </div>
+
+    <div class="scroll-hint reveal">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 80px 0 60px;
+    position: relative;
+  }
+
+  .hero-inner {
+    text-align: center;
+    max-width: 900px;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 18px;
+    border-radius: 999px;
+    background: var(--surface-strong);
+    border: 1px solid var(--border);
+    color: var(--text-1);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    margin-bottom: 32px;
+    backdrop-filter: blur(10px);
+  }
+
+  .hero-badge .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--mint-deep);
+    box-shadow: 0 0 12px var(--mint-deep);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .stripes-deco {
+    width: 140px;
+    height: 6px;
+    margin: 24px auto 0;
+    border-radius: 999px;
+    background: repeating-linear-gradient(
+      90deg,
+      var(--mint) 0 14px,
+      var(--rose) 14px 22px,
+      var(--sky) 22px 32px,
+      var(--butter) 32px 38px,
+      var(--lavender) 38px 52px
+    );
+    opacity: 0.85;
+  }
+
+  .hero-subtitle {
+    display: inline-block;
+    margin-top: 16px;
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+    color: var(--text-2);
+    font-weight: 500;
+  }
+
+  .hero-lead {
+    margin: 32px auto 0;
+    max-width: 680px;
+    color: var(--text-1);
+    font-size: 1.15rem;
+  }
+
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin: 56px 0;
+  }
+
+  @media (max-width: 640px) {
+    .hero-stats { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .stat {
+    padding: 24px 12px;
+    background: var(--surface-strong);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    backdrop-filter: blur(20px);
+    box-shadow: var(--shadow-soft);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .stat:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 50px -15px rgba(58, 70, 120, 0.2);
+  }
+
+  .stat-value {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    font-weight: 700;
+  }
+
+  .stat-label {
+    font-size: 0.85rem;
+    color: var(--text-2);
+    margin-top: 4px;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary, .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--lavender-deep), var(--mint-deep));
+    color: white;
+    box-shadow: 0 10px 30px -8px rgba(157, 127, 209, 0.5);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 40px -8px rgba(157, 127, 209, 0.65);
+  }
+
+  .btn-secondary {
+    background: var(--surface-strong);
+    border: 1px solid var(--border-strong);
+    color: var(--text-0);
+    backdrop-filter: blur(10px);
+  }
+
+  .btn-secondary:hover {
+    background: white;
+    transform: translateY(-2px);
+  }
+
+  .scroll-hint {
+    margin-top: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    color: var(--text-3);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--lavender-deep), transparent);
+    animation: float 2s ease-in-out infinite;
+  }
+</style>

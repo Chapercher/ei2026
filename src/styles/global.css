@@ -1,0 +1,288 @@
+:root {
+  /* Palette pastel (inspirée de la photo : chemise + dégradé fond) */
+  --bg-0: #f4f7fb;
+  --bg-1: #ffffff;
+  --bg-grad-1: #d6efe9;  /* cyan-menthe */
+  --bg-grad-2: #f8f0f5;  /* blanc rosé */
+  --bg-grad-3: #e4d9f5;  /* lavande */
+
+  --surface: rgba(255, 255, 255, 0.65);
+  --surface-strong: rgba(255, 255, 255, 0.85);
+  --surface-hover: rgba(255, 255, 255, 0.95);
+  --border: rgba(31, 41, 80, 0.08);
+  --border-strong: rgba(31, 41, 80, 0.16);
+
+  --text-0: #1a2238;
+  --text-1: #3d4666;
+  --text-2: #6b7596;
+  --text-3: #9aa2bc;
+
+  /* Accents repris de la chemise */
+  --mint: #9ed5c5;
+  --mint-deep: #6bb9a3;
+  --rose: #f3b7c7;
+  --rose-deep: #e285a0;
+  --sky: #b8cce4;
+  --sky-deep: #7ea3cc;
+  --butter: #f5e6a8;
+  --butter-deep: #d4b94e;
+  --lavender: #c9b8e8;
+  --lavender-deep: #9d7fd1;
+  --coral: #f4a896;
+
+  --accent: var(--lavender-deep);
+  --accent-2: var(--mint-deep);
+  --accent-3: var(--butter-deep);
+  --accent-4: var(--rose-deep);
+  --success: var(--mint-deep);
+
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 28px;
+
+  --shadow-soft: 0 8px 32px -8px rgba(124, 92, 200, 0.18);
+  --shadow-glow: 0 0 60px rgba(201, 184, 232, 0.4);
+  --shadow-card: 0 20px 60px -20px rgba(58, 70, 120, 0.15);
+
+  --font-display: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-0);
+  color: var(--text-0);
+  line-height: 1.65;
+  overflow-x: hidden;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Fond pastel exactement comme la photo : cyan-menthe à gauche → blanc → lavande à droite */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    linear-gradient(120deg,
+      var(--bg-grad-1) 0%,
+      var(--bg-grad-2) 50%,
+      var(--bg-grad-3) 100%);
+  z-index: -3;
+  pointer-events: none;
+}
+
+/* Halos de couleur en plus pour profondeur */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 15% 25%, rgba(158, 213, 197, 0.35), transparent 45%),
+    radial-gradient(circle at 85% 75%, rgba(201, 184, 232, 0.4), transparent 45%),
+    radial-gradient(circle at 75% 15%, rgba(243, 183, 199, 0.25), transparent 40%);
+  z-index: -2;
+  pointer-events: none;
+  filter: blur(20px);
+}
+
+/* Grain texturé subtil */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.4;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.05 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.12;
+  color: var(--text-0);
+}
+
+h1 { font-size: clamp(2.5rem, 6vw, 4.8rem); }
+h2 { font-size: clamp(1.9rem, 4vw, 3rem); }
+h3 { font-size: clamp(1.2rem, 2.5vw, 1.5rem); }
+
+p { color: var(--text-1); }
+
+a { color: var(--lavender-deep); text-decoration: none; }
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+section {
+  padding: 120px 0;
+  position: relative;
+}
+
+/* Tags */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  background: var(--surface-strong);
+  border: 1px solid var(--border);
+  color: var(--text-1);
+  backdrop-filter: blur(10px);
+}
+
+.tag-accent {
+  background: rgba(201, 184, 232, 0.3);
+  border-color: rgba(157, 127, 209, 0.35);
+  color: #6b48a8;
+}
+
+.tag-mint {
+  background: rgba(158, 213, 197, 0.3);
+  border-color: rgba(107, 185, 163, 0.4);
+  color: #3a8770;
+}
+
+.tag-rose {
+  background: rgba(243, 183, 199, 0.3);
+  border-color: rgba(226, 133, 160, 0.4);
+  color: #b95778;
+}
+
+.tag-gold {
+  background: rgba(245, 230, 168, 0.4);
+  border-color: rgba(212, 185, 78, 0.45);
+  color: #8a7220;
+}
+
+/* Cartes glassmorphism clair */
+.glass {
+  background: var(--surface);
+  backdrop-filter: blur(24px) saturate(1.2);
+  -webkit-backdrop-filter: blur(24px) saturate(1.2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass:hover {
+  background: var(--surface-hover);
+  border-color: var(--border-strong);
+  transform: translateY(-3px);
+  box-shadow: 0 28px 70px -20px rgba(58, 70, 120, 0.22);
+}
+
+/* Section heading */
+.section-head {
+  text-align: center;
+  margin-bottom: 72px;
+}
+
+.section-head .tag {
+  margin-bottom: 18px;
+}
+
+.section-head p {
+  color: var(--text-2);
+  font-size: 1.1rem;
+  margin-top: 14px;
+  max-width: 620px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Gradient text — repris des couleurs de la chemise */
+.gradient-text {
+  background: linear-gradient(135deg, var(--lavender-deep) 0%, var(--mint-deep) 60%, var(--rose-deep) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-text-warm {
+  background: linear-gradient(135deg, var(--rose-deep), var(--butter-deep));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Animations */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 30px rgba(157, 127, 209, 0.3); }
+  50% { box-shadow: 0 0 50px rgba(157, 127, 209, 0.5); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Bande rayée façon chemise (décoration accent) */
+.stripes {
+  background: repeating-linear-gradient(
+    90deg,
+    var(--mint) 0,
+    var(--mint) 14px,
+    var(--rose) 14px,
+    var(--rose) 22px,
+    var(--sky) 22px,
+    var(--sky) 32px,
+    var(--butter) 32px,
+    var(--butter) 38px,
+    var(--lavender) 38px,
+    var(--lavender) 52px
+  );
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--bg-grad-2); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--lavender-deep), var(--mint-deep));
+  border-radius: 10px;
+}

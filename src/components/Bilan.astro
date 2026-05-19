@@ -1,0 +1,143 @@
+---
+const questions = [
+  {
+    q: 'Que pensez-vous de mon travail cette année ?',
+    a: '[Réponse à recueillir pendant l\'entretien]',
+  },
+  {
+    q: 'Ai-je atteint les objectifs qui m\'avaient été fixés ?',
+    a: '[Réponse à recueillir pendant l\'entretien]',
+  },
+  {
+    q: 'Est-ce que j\'avance assez vite sur les sujets IA ?',
+    a: '[Réponse à recueillir pendant l\'entretien]',
+  },
+  {
+    q: 'Y a-t-il des axes d\'amélioration que vous voyez pour la suite ?',
+    a: '[Réponse à recueillir pendant l\'entretien]',
+  },
+];
+---
+<section id="bilan" class="bilan">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="tag tag-mint">✓ Épilogue</span>
+      <h2>Vos <span class="gradient-text">retours</span></h2>
+      <p>Les questions que je souhaite vous poser à l'occasion de cet entretien — votre regard sur mon travail, mes axes de progression, et ce que vous attendez pour la suite.</p>
+    </div>
+
+    <div class="questions">
+      {questions.map((item, i) => (
+        <details class="q-item reveal">
+          <summary>
+            <span class="q-num">Q.{String(i + 1).padStart(2, '0')}</span>
+            <span class="q-text">{item.q}</span>
+            <span class="q-toggle">+</span>
+          </summary>
+          <div class="q-answer">
+            <p>{item.a}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+
+    <footer class="thanks reveal">
+      <p>Merci pour la lecture — et pour cette année partagée.</p>
+      <span class="signature">— Quentin · 2026</span>
+    </footer>
+  </div>
+</section>
+
+<style>
+  .questions {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  .q-item {
+    background: var(--surface-strong);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    margin-bottom: 12px;
+    overflow: hidden;
+    backdrop-filter: blur(20px);
+    transition: all 0.3s;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .q-item:hover {
+    border-color: var(--border-strong);
+  }
+
+  .q-item[open] {
+    border-color: rgba(157, 127, 209, 0.4);
+    background: rgba(201, 184, 232, 0.18);
+  }
+
+  .q-item summary {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 24px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+  }
+
+  .q-item summary::-webkit-details-marker { display: none; }
+
+  .q-num {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--mint-deep);
+    font-weight: 600;
+  }
+
+  .q-text {
+    flex: 1;
+    font-weight: 500;
+    color: var(--text-0);
+  }
+
+  .q-toggle {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(201, 184, 232, 0.4);
+    border-radius: 50%;
+    font-size: 1.2rem;
+    color: var(--lavender-deep);
+    transition: transform 0.3s;
+  }
+
+  .q-item[open] .q-toggle {
+    transform: rotate(45deg);
+  }
+
+  .q-answer {
+    padding: 0 24px 24px 64px;
+    color: var(--text-1);
+  }
+
+  .thanks {
+    text-align: center;
+    margin-top: 80px;
+    padding-top: 40px;
+    border-top: 1px solid var(--border);
+  }
+
+  .thanks p {
+    font-size: 1.2rem;
+    color: var(--text-1);
+  }
+
+  .signature {
+    display: inline-block;
+    margin-top: 12px;
+    font-family: var(--font-mono);
+    color: var(--text-3);
+    font-size: 0.85rem;
+  }
+</style>

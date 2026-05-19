@@ -1,0 +1,777 @@
+---
+const poles = [
+  {
+    id: 'webmarketing',
+    name: 'Webmarketing',
+    icon: '📈',
+    color: 'mint',
+    desc: 'Support technique, automatisations, outils internes pour le suivi des mises en ligne et du SEO',
+    tools: [
+      {
+        name: 'CRM · Section "Mise en ligne"',
+        summary: 'Tableau de bord centralisé qui répertorie tous les sites en dev et en prod (WordPress/WooCommerce et PrestaShop), avec un check par site des outils déployés : GA4, module de cookies (TAC / Axeptio), Google Ads, Pixel Meta, meta-title, meta-description. Permet à l\'équipe de voir d\'un coup d\'œil ce qui manque encore par site.',
+        tech: ['CRM interne', 'PHP', 'Scan automatique'],
+        status: 'prod',
+        impact: '543 sites suivis (306 WP/WC + 237 PrestaShop)',
+      },
+      {
+        name: 'Workflow n8n · SEO & contenu e-commerce',
+        summary: 'Workflow d\'automatisation n8n qui génère à la chaîne du contenu SEO, des meta-titles et meta-descriptions optimisés pour les fiches produit e-commerce. L\'équipe webmarketing peut traiter des catalogues entiers sans repasser manuellement sur chaque produit.',
+        tech: ['n8n', 'Claude IA', 'API PrestaShop', 'API WooCommerce'],
+        status: 'prod',
+        impact: 'SEO automatisé à l\'échelle du catalogue — gain de temps massif sur les nouvelles boutiques',
+      },
+      {
+        name: 'SEO Checker post mise en ligne',
+        summary: 'Outil qui contrôle automatiquement les problèmes SEO juste après la mise en ligne d\'un site (titres, balises, structure, etc.). Couplé à un outil de redirection boosté à l\'IA pour générer les règles de redirection à partir de l\'ancien plan de site.',
+        tech: ['Crawling', 'Claude IA', 'PHP'],
+        status: 'obsolete',
+        impact: 'Rendu obsolète par Hermes',
+      },
+    ],
+  },
+  {
+    id: 'graphistes',
+    name: 'Graphistes',
+    icon: '🎨',
+    color: 'rose',
+    desc: 'Outils IA pour soulager la production graphique : retouche par lot, exploration de nouveaux outils de maquette',
+    tools: [
+      {
+        name: 'SaaS de traitement d\'image par lot',
+        summary: 'Application interne qui transforme des photos produit brutes (floues, fond hétérogène) en visuels propres sur fond blanc, dignes d\'un studio photo. L\'équipe upload un lot, le SaaS sort des images prêtes à publier — un gain de temps énorme sur les fiches produit.',
+        tech: ['SaaS', 'IA générative', 'Traitement d\'image', 'PHP'],
+        status: 'prod',
+        impact: 'Déployé chez Paget Frères — visuels produit beaucoup plus pro sans repasser par un photographe',
+      },
+      {
+        name: 'Veille & tests d\'outils de maquette IA',
+        summary: 'Sur mon temps perso, je teste les outils émergents type Opendesign / Lovable pour générer des maquettes web par IA. Objectif : préparer le terrain et identifier ceux qui pourraient à terme accélérer la phase de design dans l\'agence.',
+        tech: ['Opendesign', 'Lovable', 'Veille IA'],
+        status: 'dev',
+        impact: 'Veille active — restitutions à l\'équipe pour anticiper les outils de demain',
+      },
+    ],
+  },
+  {
+    id: 'devs',
+    name: 'Développeurs',
+    icon: '⚙️',
+    color: 'lavender',
+    desc: 'Modules métier, automatisations de mise en ligne, IA appliquée aux sites e-commerce',
+    tools: [
+      {
+        name: 'Mise en ligne automatique WordPress',
+        summary: 'Outil qui automatise la mise en ligne d\'un site WordPress dès que le nom de domaine est chez OVH : configuration serveur, base, checklist de vérifs intégrée. À améliorer suite aux retours des dev — la base est là et déjà utilisée.',
+        tech: ['Bash', 'OVH API', 'PHP', 'WordPress'],
+        status: 'prod',
+        impact: 'Réduction drastique du temps de MEL d\'un WP — l\'équipe utilise l\'outil au quotidien',
+      },
+      {
+        name: 'Module bwaapi (PrestaShop)',
+        summary: 'Module développé pour enrichir tous les sites PrestaShop de l\'agence avec des fonctionnalités communes (IA, services internes, intégrations). Une brique transverse réutilisable sur toute notre flotte e-commerce.',
+        tech: ['PrestaShop', 'PHP', 'API interne'],
+        status: 'prod',
+        impact: 'Brique partagée par l\'ensemble des projets PrestaShop',
+      },
+      {
+        name: 'Module FAQ génératif',
+        summary: 'Module qui génère automatiquement des FAQ pour les fiches produit et les pages catégorie d\'un site e-commerce via IA. Plus besoin d\'écrire les questions/réponses à la main pour des centaines de produits.',
+        tech: ['Claude IA', 'PrestaShop', 'PHP'],
+        status: 'prod',
+        impact: 'FAQ riches automatiquement pour booster le SEO et l\'expérience client',
+      },
+      {
+        name: 'Module Search IA PrestaShop',
+        summary: 'Enrichit le moteur de recherche PrestaShop avec de l\'IA : résultats plus pertinents, et surtout propositions business côté back-office pour le client (création de pages dédiées sur les recherches sans résultat, alertes par mail, etc.).',
+        tech: ['Claude IA', 'PrestaShop', 'PHP'],
+        status: 'prod',
+        impact: 'Recherche plus pertinente + leviers business identifiés automatiquement pour le client',
+      },
+      {
+        name: 'Module e-sommelier',
+        summary: 'Module qui génère une courte description orale (audio) sur les vins d\'un catalogue. Permet aux sites vinicoles de proposer un complément immersif aux fiches produit, comme un vrai sommelier.',
+        tech: ['Claude IA', 'TTS', 'PrestaShop'],
+        status: 'prod',
+        impact: 'Différenciation forte pour les e-commerces du secteur viticole',
+      },
+      {
+        name: 'SaaS Chatbot (e-commerce & WordPress)',
+        summary: 'SaaS de chatbot prêt à déployer sur tous nos sites e-commerce et WordPress. En phase de test mais déjà fonctionnel. Co-construit avec Maxime sur la partie Python.',
+        tech: ['Python', 'Claude IA', 'SaaS'],
+        status: 'dev',
+        impact: 'Une fois en prod : chatbot déployable sur toute la flotte de sites',
+      },
+      {
+        name: 'Docker PrestaShop + agent Claude one-click',
+        summary: 'Mise sous Docker des projets PrestaShop pour disposer d\'environnements locaux stables et reproductibles. Création d\'un agent Claude qui exécute la dockerisation en un clic à partir d\'un projet existant.',
+        tech: ['Docker', 'PrestaShop', 'Agent Claude'],
+        status: 'prod',
+        impact: 'Setup local PrestaShop ultra-rapide et fiable pour toute l\'équipe',
+      },
+    ],
+  },
+  {
+    id: 'compta',
+    name: 'Compta',
+    icon: '📊',
+    color: 'sky',
+    desc: 'Automatisations pour soulager le pôle compta sur les tâches récurrentes',
+    tools: [
+      {
+        name: 'Automatisation facturation NDD / mails / hébergement',
+        summary: 'Système qui automatise la facturation des prestations récurrentes : noms de domaine, comptes mails, hébergements. Génération et émission des factures sans intervention manuelle.',
+        tech: ['PHP', 'Automatisation', 'CRM interne'],
+        status: 'prod',
+        impact: 'Gain de temps mensuel pour le pôle compta, plus aucun oubli sur les renouvellements',
+      },
+    ],
+  },
+  {
+    id: 'business',
+    name: 'Partenariats',
+    icon: '🤝',
+    color: 'gold',
+    desc: 'Relation commerciale avec nos partenaires clés — hors fiche de poste, mais j\'adore garder ce lien',
+    tools: [
+      {
+        name: 'MBE',
+        summary: 'Relation commerciale entretenue avec notre partenaire logistique MBE. Suivi des opportunités, échanges réguliers, point de contact côté agence.',
+        tech: ['Partenariat', 'Logistique'],
+        status: 'prod',
+        impact: 'Relation active maintenue tout au long de l\'année',
+      },
+      {
+        name: 'PrestaShop',
+        summary: 'Relation avec l\'éditeur PrestaShop. Veille technique, échanges sur les évolutions de la plateforme, positionnement de l\'agence dans l\'écosystème.',
+        tech: ['Partenariat', 'E-commerce'],
+        status: 'prod',
+        impact: 'Agence bien positionnée dans l\'écosystème PrestaShop',
+      },
+      {
+        name: 'Probance',
+        summary: 'Relation commerciale avec Probance (marketing automation). Discussion sur les intégrations possibles avec nos clients e-commerce.',
+        tech: ['Partenariat', 'Marketing automation'],
+        status: 'prod',
+        impact: 'Pont entre Probance et nos clients e-commerce',
+      },
+      {
+        name: 'Payplug',
+        summary: 'Relation avec Payplug (paiement en ligne). Suivi des évolutions produit, opportunités d\'intégration sur nos sites e-commerce.',
+        tech: ['Partenariat', 'Paiement'],
+        status: 'prod',
+        impact: 'Lien direct avec l\'équipe Payplug',
+      },
+      {
+        name: 'OVH',
+        summary: 'Relation commerciale avec OVH (hébergement & infra). Très important au vu du volume de sites que nous y hébergeons. Suivi des offres, escalade des incidents, partage de bonnes pratiques.',
+        tech: ['Partenariat', 'Hébergement', 'Infra'],
+        status: 'prod',
+        impact: 'Partenaire infra clé — relation directe entretenue',
+      },
+    ],
+  },
+];
+---
+<section id="hub" class="hub-section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="tag tag-accent">L'humain au cœur</span>
+      <h2>Au centre des <span class="gradient-text">pôles de l'agence</span></h2>
+      <p>Cliquez sur un pôle pour voir les outils et projets que j'ai conçus pour eux cette année.</p>
+    </div>
+
+    <div class="hub reveal">
+      <div class="hub-map">
+        <div class="me">
+          <div class="me-inner">
+            <span>Quentin</span>
+            <small>Pôle IA</small>
+          </div>
+        </div>
+        {poles.map((p, i) => (
+          <button
+            type="button"
+            class={`pole pole-${i} pole-${p.color}`}
+            data-pole={p.id}
+            aria-label={`Voir les projets pour ${p.name}`}
+          >
+            <span class="pole-icon">{p.icon}</span>
+            <span class="pole-name">{p.name}</span>
+          </button>
+        ))}
+        <svg class="connections" viewBox="0 0 600 600" preserveAspectRatio="none" aria-hidden="true">
+          <line x1="300" y1="300" x2="80" y2="160" />
+          <line x1="300" y1="300" x2="520" y2="160" />
+          <line x1="300" y1="300" x2="60" y2="440" />
+          <line x1="300" y1="300" x2="540" y2="440" />
+          <line x1="300" y1="300" x2="300" y2="560" />
+        </svg>
+      </div>
+
+      <div class="hub-panel" id="hub-panel">
+        {poles.map((p, i) => (
+          <article class={`panel-content ${i === 0 ? 'is-active' : ''}`} data-panel={p.id}>
+            <header class={`panel-head panel-${p.color}`}>
+              <div>
+                <span class="panel-icon">{p.icon}</span>
+                <h3>{p.name}</h3>
+              </div>
+              <p>{p.desc}</p>
+            </header>
+            <div class="slider-wrap">
+              <button class="slider-btn slider-prev" type="button" aria-label="Précédent" data-dir="-1">‹</button>
+              <div class="slider" data-slider>
+                {p.tools.map((t) => (
+                  <article class={`tool tool-${t.status || 'default'}`}>
+                    {t.image && (
+                      <a class="tool-image" href={t.image} target="_blank" rel="noopener" aria-label="Voir en grand">
+                        <img src={t.image} alt={t.name} loading="lazy" />
+                      </a>
+                    )}
+                    <div class="tool-body">
+                      <header class="tool-head">
+                        <h4>{t.name}</h4>
+                        {t.status && t.status !== 'placeholder' && (
+                          <span class={`tool-status status-${t.status}`}>
+                            {t.status === 'prod' && '● En prod'}
+                            {t.status === 'dev' && '● En dev'}
+                            {t.status === 'obsolete' && '◌ Obsolète'}
+                          </span>
+                        )}
+                      </header>
+                      <p>{t.summary}</p>
+                      {t.impact && <div class="tool-impact"><strong>Impact :</strong> {t.impact}</div>}
+                      <div class="tool-tech">
+                        {t.tech.map((c) => <span class="chip">{c}</span>)}
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+              <button class="slider-btn slider-next" type="button" aria-label="Suivant" data-dir="1">›</button>
+              <div class="slider-dots" data-dots data-count={p.tools.length}></div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    // --- Navigation pôles ---
+    const buttons = document.querySelectorAll('.pole[data-pole]');
+    const panels = document.querySelectorAll('.panel-content');
+    if (buttons[0]) buttons[0].classList.add('is-active');
+
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-pole');
+        buttons.forEach((b) => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+        panels.forEach((p) => {
+          p.classList.toggle('is-active', p.getAttribute('data-panel') === id);
+        });
+        const panel = document.getElementById('hub-panel');
+        if (panel) panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      });
+    });
+
+    // --- Sliders d'outils ---
+    document.querySelectorAll('.slider-wrap').forEach((wrap) => {
+      const slider = wrap.querySelector('[data-slider]');
+      const prev = wrap.querySelector('.slider-prev');
+      const next = wrap.querySelector('.slider-next');
+      const dotsContainer = wrap.querySelector('[data-dots]');
+      const count = parseInt(dotsContainer?.dataset.count || '0', 10);
+
+      // Génération des dots
+      if (dotsContainer && count > 1) {
+        for (let i = 0; i < count; i++) {
+          const dot = document.createElement('button');
+          dot.type = 'button';
+          dot.setAttribute('aria-label', `Aller à l'outil ${i + 1}`);
+          if (i === 0) dot.classList.add('is-active');
+          dot.addEventListener('click', () => {
+            const card = slider.children[i];
+            if (card) card.scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+          });
+          dotsContainer.appendChild(dot);
+        }
+      }
+
+      // Boutons prev/next
+      const scrollByCard = (dir) => {
+        const card = slider.querySelector('.tool');
+        if (!card) return;
+        const w = card.getBoundingClientRect().width + 18;
+        slider.scrollBy({ left: w * dir, behavior: 'smooth' });
+      };
+      prev?.addEventListener('click', () => scrollByCard(-1));
+      next?.addEventListener('click', () => scrollByCard(1));
+
+      // Cacher boutons si un seul outil
+      if (count <= 1) {
+        prev?.style.setProperty('display', 'none');
+        next?.style.setProperty('display', 'none');
+      }
+
+      // Mise à jour dots sur scroll
+      const dots = dotsContainer?.querySelectorAll('button');
+      if (dots && dots.length > 0) {
+        slider.addEventListener('scroll', () => {
+          const idx = Math.round(slider.scrollLeft / slider.clientWidth);
+          dots.forEach((d, i) => d.classList.toggle('is-active', i === idx));
+        });
+      }
+
+      // Cacher prev/next en bord
+      const updateArrows = () => {
+        if (!prev || !next) return;
+        const max = slider.scrollWidth - slider.clientWidth - 2;
+        prev.style.opacity = slider.scrollLeft <= 2 ? '0.3' : '1';
+        next.style.opacity = slider.scrollLeft >= max ? '0.3' : '1';
+        prev.style.pointerEvents = slider.scrollLeft <= 2 ? 'none' : 'auto';
+        next.style.pointerEvents = slider.scrollLeft >= max ? 'none' : 'auto';
+      };
+      updateArrows();
+      slider.addEventListener('scroll', updateArrows);
+    });
+  });
+</script>
+
+<style>
+  .hub {
+    display: grid;
+    grid-template-columns: 460px minmax(0, 1fr);
+    gap: 56px;
+    align-items: start;
+  }
+
+  @media (max-width: 1100px) {
+    .hub { grid-template-columns: 380px minmax(0, 1fr); gap: 40px; }
+  }
+
+  @media (max-width: 960px) {
+    .hub { grid-template-columns: 1fr; gap: 40px; }
+  }
+
+  .hub-map {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+    max-width: 460px;
+    margin: 0 auto;
+  }
+
+  .connections {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+
+  .connections line {
+    stroke: rgba(157, 127, 209, 0.35);
+    stroke-width: 1.2;
+    stroke-dasharray: 4 6;
+    animation: dash 14s linear infinite;
+  }
+
+  @keyframes dash { to { stroke-dashoffset: -100; } }
+
+  .me {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+  }
+
+  .me-inner {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--lavender-deep), var(--mint-deep) 55%, var(--rose-deep));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-family: var(--font-display);
+    box-shadow: 0 0 60px rgba(201, 184, 232, 0.6);
+    animation: pulse-glow 3.5s infinite;
+  }
+
+  .me-inner span {
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+  .me-inner small {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    opacity: 0.9;
+    margin-top: 4px;
+  }
+
+  .pole {
+    position: absolute;
+    width: 150px;
+    padding: 16px 14px;
+    background: var(--surface-strong);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    backdrop-filter: blur(20px);
+    text-align: center;
+    cursor: pointer;
+    z-index: 1;
+    transition: all 0.3s;
+    box-shadow: var(--shadow-soft);
+    font-family: var(--font-display);
+    color: var(--text-0);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .pole:hover {
+    transform: scale(1.06);
+    box-shadow: 0 20px 50px -15px rgba(58, 70, 120, 0.2);
+  }
+
+  .pole.is-active {
+    transform: scale(1.06);
+    border-width: 2px;
+  }
+
+  .pole-0 { top: 18%; left: 0; }
+  .pole-1 { top: 18%; right: 0; }
+  .pole-2 { bottom: 18%; left: 0; }
+  .pole-3 { bottom: 18%; right: 0; }
+  .pole-4 { bottom: -2%; left: 50%; transform: translateX(-50%); }
+  .pole-4:hover, .pole-4.is-active { transform: translateX(-50%) scale(1.06); }
+
+  .pole-mint.is-active { border-color: var(--mint-deep); background: rgba(158, 213, 197, 0.35); }
+  .pole-rose.is-active { border-color: var(--rose-deep); background: rgba(243, 183, 199, 0.35); }
+  .pole-lavender.is-active { border-color: var(--lavender-deep); background: rgba(201, 184, 232, 0.4); }
+  .pole-sky.is-active { border-color: var(--sky-deep); background: rgba(184, 204, 228, 0.4); }
+  .pole-gold.is-active { border-color: var(--butter-deep); background: rgba(245, 230, 168, 0.5); }
+
+  .pole-icon { font-size: 1.6rem; }
+  .pole-name { font-size: 0.92rem; font-weight: 600; }
+
+  /* Panel */
+  .hub-panel {
+    position: relative;
+    min-height: 400px;
+  }
+
+  .panel-content {
+    display: none;
+    opacity: 0;
+    animation: fadeUp 0.5s ease forwards;
+  }
+
+  .panel-content.is-active {
+    display: block;
+  }
+
+  .panel-head {
+    padding: 28px;
+    background: var(--surface-strong);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    margin-bottom: 24px;
+    backdrop-filter: blur(20px);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .panel-head > div {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 8px;
+  }
+
+  .panel-icon {
+    font-size: 2rem;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.6);
+  }
+
+  .panel-mint { border-left: 4px solid var(--mint-deep); }
+  .panel-rose { border-left: 4px solid var(--rose-deep); }
+  .panel-lavender { border-left: 4px solid var(--lavender-deep); }
+  .panel-sky { border-left: 4px solid var(--sky-deep); }
+  .panel-gold { border-left: 4px solid var(--butter-deep); }
+
+  .panel-head h3 {
+    font-size: 1.5rem;
+    margin: 0;
+  }
+
+  .panel-head p {
+    color: var(--text-2);
+    margin: 0;
+  }
+
+  .slider-wrap {
+    position: relative;
+  }
+
+  .slider {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    gap: 18px;
+    padding: 6px 4px 14px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--lavender-deep) transparent;
+  }
+
+  .slider::-webkit-scrollbar { height: 6px; }
+  .slider::-webkit-scrollbar-track { background: transparent; }
+  .slider::-webkit-scrollbar-thumb {
+    background: rgba(157, 127, 209, 0.4);
+    border-radius: 6px;
+  }
+
+  .tool {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    display: grid;
+    grid-template-columns: 1fr;
+    background: var(--surface-strong);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    backdrop-filter: blur(16px);
+    transition: all 0.3s;
+    box-shadow: var(--shadow-soft);
+    overflow: hidden;
+  }
+
+  .tool:has(.tool-image) {
+    grid-template-columns: 240px 1fr;
+  }
+
+  @media (max-width: 720px) {
+    .tool:has(.tool-image) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Boutons slider */
+  .slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--surface-strong);
+    border: 1px solid var(--border);
+    color: var(--lavender-deep);
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 5;
+    box-shadow: 0 6px 20px -6px rgba(58, 70, 120, 0.25);
+    backdrop-filter: blur(10px);
+    transition: all 0.25s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 4px;
+  }
+
+  .slider-btn:hover {
+    background: white;
+    transform: translateY(-50%) scale(1.1);
+    color: var(--mint-deep);
+  }
+
+  .slider-prev { left: -18px; }
+  .slider-next { right: -18px; }
+
+  @media (max-width: 720px) {
+    .slider-prev { left: 4px; }
+    .slider-next { right: 4px; }
+  }
+
+  /* Dots */
+  .slider-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 14px;
+  }
+
+  .slider-dots button {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(157, 127, 209, 0.25);
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.25s;
+  }
+
+  .slider-dots button.is-active {
+    background: var(--lavender-deep);
+    transform: scale(1.4);
+  }
+
+  .tool-placeholder {
+    border-style: dashed;
+    opacity: 0.6;
+  }
+
+  .tool:hover {
+    transform: translateY(-3px);
+    border-color: var(--border-strong);
+    box-shadow: 0 18px 40px -15px rgba(58, 70, 120, 0.18);
+  }
+
+  .tool-image {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    background: linear-gradient(135deg, rgba(201,184,232,0.2), rgba(158,213,197,0.2));
+    border-right: 1px solid var(--border);
+  }
+
+  .tool-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top left;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+
+  .tool-image:hover img { transform: scale(1.03); }
+
+  @media (max-width: 720px) {
+    .tool-image { border-right: none; border-bottom: 1px solid var(--border); }
+    .tool-image img { aspect-ratio: 16/9; }
+  }
+
+  .tool-body { padding: 22px; }
+
+  .tool-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+  }
+
+  .tool h4 {
+    font-size: 1.1rem;
+    margin: 0;
+  }
+
+  .tool-status {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 4px 10px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  .status-prod {
+    background: rgba(158, 213, 197, 0.4);
+    color: #2f6e5a;
+    border: 1px solid rgba(107, 185, 163, 0.4);
+  }
+
+  .status-dev {
+    background: rgba(184, 204, 228, 0.4);
+    color: #3a6e96;
+    border: 1px solid rgba(126, 163, 204, 0.4);
+  }
+
+  .status-obsolete {
+    background: rgba(154, 162, 188, 0.2);
+    color: #555a72;
+    border: 1px solid rgba(154, 162, 188, 0.4);
+    text-decoration: line-through;
+    text-decoration-thickness: 1px;
+  }
+
+  .tool p {
+    font-size: 0.92rem;
+    margin-bottom: 12px;
+    color: var(--text-1);
+    line-height: 1.55;
+  }
+
+  .tool-impact {
+    font-size: 0.85rem;
+    color: var(--text-2);
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: rgba(158, 213, 197, 0.18);
+    border: 1px solid rgba(107, 185, 163, 0.25);
+    margin-bottom: 14px;
+  }
+
+  .tool-impact strong {
+    color: var(--mint-deep);
+    margin-right: 6px;
+  }
+
+  .tool-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .chip {
+    padding: 3px 9px;
+    border-radius: 6px;
+    background: rgba(201, 184, 232, 0.3);
+    border: 1px solid rgba(157, 127, 209, 0.3);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: #6b48a8;
+  }
+
+  /* Adaptations mobile pour la map */
+  @media (max-width: 540px) {
+    .hub-map { aspect-ratio: auto; max-width: 100%; }
+    .me { position: relative; top: auto; left: auto; transform: none; margin: 0 auto 24px; }
+    .me-inner { width: 110px; height: 110px; }
+    .pole {
+      position: relative;
+      top: auto !important;
+      left: auto !important;
+      right: auto !important;
+      bottom: auto !important;
+      transform: none !important;
+      width: 100%;
+      margin-bottom: 10px;
+      flex-direction: row;
+      justify-content: flex-start;
+      text-align: left;
+    }
+    .pole-4 { transform: none !important; }
+    .pole-4:hover, .pole-4.is-active { transform: none !important; }
+    .connections { display: none; }
+  }
+</style>

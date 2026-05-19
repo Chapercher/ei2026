@@ -1,0 +1,143 @@
+---
+const bosses = [
+  {
+    name: '[Mini-Boss à définir]',
+    hp: '???',
+    desc: 'Un défi complexe à raconter lors de notre session questions/réponses.',
+    strategy: '—',
+    loot: ['—'],
+  },
+];
+---
+<section id="boss" class="bosses">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="tag tag-rose">◆ Chapitre 2</span>
+      <h2>Mini-Boss <span class="gradient-text-warm">vaincus</span></h2>
+      <p>Les défis costauds de l'année — ceux qui demandaient plus que du métier : autonomie, sang-froid, et la capacité à inventer la solution.</p>
+    </div>
+
+    <div class="boss-grid">
+      {bosses.map((b) => (
+        <article class="boss reveal">
+          <div class="boss-art">
+            <div class="boss-emoji">⚔️</div>
+          </div>
+          <div class="boss-content">
+            <h3>{b.name}</h3>
+            <div class="boss-hp">
+              <span class="hp-label">DIFFICULTÉ</span>
+              <span class="hp-value">{b.hp}</span>
+            </div>
+            <p>{b.desc}</p>
+            <div class="boss-meta">
+              <div>
+                <h4>Stratégie déployée</h4>
+                <p class="muted">{b.strategy}</p>
+              </div>
+              <div>
+                <h4>Butin</h4>
+                <ul>
+                  {b.loot.map((l) => <li>{l}</li>)}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .boss-grid {
+    display: grid;
+    gap: 24px;
+  }
+
+  .boss {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 28px;
+    padding: 32px;
+    background: linear-gradient(135deg, rgba(243, 183, 199, 0.25), rgba(245, 230, 168, 0.2));
+    border: 1px solid rgba(226, 133, 160, 0.3);
+    border-radius: var(--radius-md);
+    backdrop-filter: blur(20px);
+    box-shadow: var(--shadow-soft);
+  }
+
+  @media (max-width: 720px) {
+    .boss { grid-template-columns: 1fr; }
+  }
+
+  .boss-art {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface-strong);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+  }
+
+  .boss-emoji {
+    font-size: 4rem;
+    filter: drop-shadow(0 0 16px rgba(226, 133, 160, 0.45));
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .boss-hp {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 12px 0 16px;
+  }
+
+  .hp-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: var(--text-3);
+  }
+
+  .hp-value {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    color: var(--rose-deep);
+  }
+
+  .boss-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 20px;
+  }
+
+  @media (max-width: 540px) {
+    .boss-meta { grid-template-columns: 1fr; }
+  }
+
+  .boss h4 {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-3);
+    margin-bottom: 6px;
+  }
+
+  .boss ul { list-style: none; }
+  .boss ul li {
+    color: var(--text-1);
+    font-size: 0.9rem;
+    padding-left: 16px;
+    position: relative;
+  }
+  .boss ul li::before {
+    content: '✦';
+    position: absolute;
+    left: 0;
+    color: var(--butter-deep);
+  }
+
+  .muted { color: var(--text-2); font-size: 0.9rem; }
+</style>
