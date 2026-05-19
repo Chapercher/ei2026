@@ -1,0 +1,190 @@
+---
+---
+<section id="client-focus" class="client-focus">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="tag tag-gold">Relation client clé</span>
+      <h2>Le projet <span class="gradient-text-warm">Grands Bourgognes</span></h2>
+      <p>Un client que j'ai à cœur de bien accompagner — la relation directe entretenue a permis de prolonger l'aventure.</p>
+    </div>
+
+    <article class="focus-card reveal">
+      <header class="focus-head">
+        <div class="focus-titles">
+          <span class="tag tag-gold">Client</span>
+          <h3>Grands Bourgognes</h3>
+          <a href="https://grandsbourgognes.com" target="_blank" rel="noopener" class="focus-link">
+            grandsbourgognes.com →
+          </a>
+        </div>
+        <div class="focus-badge">
+          <span class="badge-label">Reconduit</span>
+          <span class="badge-value">+1 an</span>
+        </div>
+      </header>
+
+      <div class="focus-body">
+        <p>
+          Depuis que j'ai repris le suivi de ce client, la relation s'est consolidée —
+          contact direct avec <strong>Lionel Petitcolas</strong> et <strong>Eryane</strong>,
+          réactivité sur les demandes, qualité du suivi technique et éditorial.
+        </p>
+        <p class="focus-result">
+          Résultat : <strong>le projet reste chez nous pour une année supplémentaire</strong>.
+          Je pense modestement y être pour quelque chose — c'est le genre de relation que
+          j'aime entretenir.
+        </p>
+      </div>
+
+      <footer class="focus-people">
+        <div class="people-row">
+          <span class="person-chip">👤 Lionel Petitcolas</span>
+          <span class="person-chip">👤 Eryane</span>
+        </div>
+      </footer>
+    </article>
+  </div>
+</section>
+
+<style>
+  .client-focus {
+    position: relative;
+  }
+
+  .focus-card {
+    background:
+      linear-gradient(135deg, rgba(245, 230, 168, 0.4), rgba(243, 183, 199, 0.3) 60%, rgba(201, 184, 232, 0.35));
+    border: 1px solid rgba(212, 185, 78, 0.35);
+    border-radius: var(--radius-lg);
+    padding: 36px;
+    backdrop-filter: blur(24px);
+    box-shadow: 0 24px 60px -20px rgba(58, 70, 120, 0.2);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .focus-card::before {
+    content: '';
+    position: absolute;
+    top: -40%;
+    right: -10%;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(245, 230, 168, 0.5), transparent 70%);
+    pointer-events: none;
+  }
+
+  .focus-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+    margin-bottom: 22px;
+    position: relative;
+  }
+
+  .focus-titles { display: flex; flex-direction: column; gap: 8px; }
+
+  .focus-titles .tag { width: fit-content; }
+
+  .focus-titles h3 {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    margin: 4px 0;
+  }
+
+  .focus-link {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--lavender-deep);
+    width: fit-content;
+    transition: color 0.2s;
+  }
+
+  .focus-link:hover { color: var(--rose-deep); }
+
+  .focus-badge {
+    flex-shrink: 0;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.75);
+    border: 1px solid rgba(212, 185, 78, 0.5);
+    border-radius: var(--radius-md);
+    padding: 14px 22px;
+    backdrop-filter: blur(10px);
+  }
+
+  .badge-label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-2);
+  }
+
+  .badge-value {
+    display: block;
+    margin-top: 4px;
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--rose-deep), var(--butter-deep));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .focus-body p {
+    color: var(--text-1);
+    font-size: 1.02rem;
+    line-height: 1.7;
+    margin-bottom: 14px;
+    position: relative;
+  }
+
+  .focus-body p strong { color: var(--text-0); }
+
+  .focus-result {
+    padding: 16px 20px;
+    background: rgba(255, 255, 255, 0.55);
+    border-left: 3px solid var(--butter-deep);
+    border-radius: 10px;
+    margin-top: 18px !important;
+  }
+
+  .focus-people {
+    margin-top: 26px;
+    padding-top: 22px;
+    border-top: 1px solid rgba(212, 185, 78, 0.25);
+    position: relative;
+  }
+
+  .people-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .person-chip {
+    padding: 8px 14px;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-size: 0.88rem;
+    color: var(--text-1);
+    backdrop-filter: blur(10px);
+  }
+
+  @media (max-width: 720px) {
+    .focus-card { padding: 26px; }
+    .focus-head { flex-direction: column; gap: 14px; }
+    .focus-badge { align-self: flex-start; padding: 10px 18px; }
+    .badge-value { font-size: 1.3rem; }
+  }
+
+  @media (max-width: 480px) {
+    .focus-card { padding: 20px; border-radius: var(--radius-md); }
+    .focus-body p { font-size: 0.95rem; }
+    .focus-result { padding: 12px 14px; }
+  }
+</style>
